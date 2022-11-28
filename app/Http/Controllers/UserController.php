@@ -8,14 +8,12 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Friend;
 use DataTables;
 
 class UserController extends Controller
 {
-    /*public function showLogin(){
-        return view('login.blade.php');
-    }*/
-
     public function showProfile(){
         return view('user.edit', [
             "user" => Auth::user()
@@ -24,7 +22,12 @@ class UserController extends Controller
 
     public function showUserInfo(Request $request){
         $user = User::find($request->id);
+        $posts = Post::where('user_id', $user->id)->get();
 
+        return view("user.show", [
+            "user" => $user,
+            "posts" => $posts,
+        ]);
     }
 
     public function saveUpdatedUser(Request $request){

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Friend;
 
@@ -58,13 +59,22 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getAllFriends(){
+    /*public function getAllFriends(){
         $friend_ids = Friend::where("user_id", $user_id)->get();
         $friends_array = [];
         foreach($friend_ids as $id){
             $user = User::find($id);
             array_push($friends_array, $user);
         }
-        return json_encode($friends_array);
+        return $friends_array;
+    }*/
+
+    public function getAllFriendsID(){
+        $friends = Friend::where("user_id", Auth::id())->get();
+        $friends_array = [];
+        foreach($friends as $friend){
+            array_push($friends_array, $friend->friend_id);
+        }
+        return $friends_array;
     }
 }

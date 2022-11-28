@@ -15,7 +15,10 @@
                     <!-- hover:bg-blue-600 hover:scale-200 transition duration-150 ease-in-out -->
                     <div class="flex pt-6 px-6">
                         <div class="w-1/2 underline text-sm italic text-gray-800 leading-tight">
-                            <a href="">
+                            <?php 
+                                $id = $post->getUser()->id; 
+                            ?>
+                            <a href='{{ url("/user/$id") }}'>
                                 {{ $post->getUser()->username }}
                             </a>
                         </div>
@@ -72,11 +75,6 @@
                             @else
                                 @if(Auth::check() && Auth::user()->isAdmin())
                                     <a href='javascript:void(0)' class="cursor-pointer deleteBtn" id="{{ $post->id }}">Delete</a>
-                                @endif
-                                @if(Auth::check() && Auth::user()->isAdmin() == false && Auth::id() != $post->user_id)
-                                    <a href="javascript:void(0)" class="reportBtn ml-4 cursor-pointer" id="{{ $post->id }}">
-                                        Report
-                                    </a>
                                 @endif
                             @endif
                         </div>
@@ -177,33 +175,6 @@
                         }
                     }
                 });
-            });
-
-            $('.reportBtn').on('click', function(){
-                Swal.fire({
-                    title: 'Are you sure, you want to report this post?',
-                    text: "Reported post will be review by admins",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, report it!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            method: "POST",
-                            url: '{{ route("post.report") }}',
-                            data: { id: this.id }
-                        })
-                        .done(function(response){
-                            response = response.replaceAll("\"", "");
-                            if(response){
-                                $('#errorMssgText').text(response);
-                                $('#errorMssg').show();
-                            }
-                        });
-                    }
-                })
             });
 
             $('.redirectBtn').on('click', function(){

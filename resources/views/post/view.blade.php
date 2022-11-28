@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" id="header-txt">
-            Viewing your stories
+            Viewing your posts
         </h2>
     </x-slot>
 
@@ -66,11 +66,6 @@
                             @else
                                 @if(Auth::check() && Auth::user()->isAdmin())
                                     <a href='javascript:void(0)' class="cursor-pointer deleteBtn" id="{{ $post->id }}">Delete</a>
-                                @endif
-                                @if(Auth::check() && Auth::user()->isAdmin() == false && Auth::id() != $post->user_id)
-                                    <a href="javascript:void(0)" class="reportBtn ml-4 cursor-pointer" id="{{ $post->id }}">
-                                        Report
-                                    </a>
                                 @endif
                             @endif
                         </div>
@@ -171,33 +166,6 @@
                         }
                     }
                 });
-            });
-
-            $('.reportBtn').on('click', function(){
-                Swal.fire({
-                    title: 'Are you sure, you want to report this post?',
-                    text: "Reported post will be review by admins",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, report it!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            method: "POST",
-                            url: '{{ route("post.report") }}',
-                            data: { id: this.id }
-                        })
-                        .done(function(response){
-                            response = response.replaceAll("\"", "");
-                            if(response){
-                                $('#errorMssgText').text(response);
-                                $('#errorMssg').show();
-                            }
-                        });
-                    }
-                })
             });
 
             $('.redirectBtn').on('click', function(){

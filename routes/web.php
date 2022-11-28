@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FriendController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,27 +38,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/post/view', [PostController::class, 'viewUserPosts'])->name('post.view');
     Route::get('/post/add', [PostController::class, 'addNewPost'])->name('post.add');
 
-    // User
-    Route::get('/profile', [UserController::class, 'showProfile']);
-    Route::get('/user/{id}', [UserController::class, 'showUserInfo']);
-});
-
-Route::middleware(['auth', 'blocked'])->group(function (){
-    // Post
     Route::post('/post/save', [PostController::class, 'saveNewPost']);
     Route::get('/post/edit/{id}', [PostController::class, 'editPost']);
     Route::post('/post/save/{id}', [PostController::class, 'saveUpdatedPost']);
     //Route::get('/post/{id}', [PostController::class, 'showPost']);
     Route::get('/post/delete/{id}', [PostController::class, 'deletePost']);
-    Route::post('/post/report', [PostController::class, 'reportPost'])->name('post.report');
 
     // Post likes
     Route::post('/post/like', [LikeController::class, 'upvotePost'])->name('post.like');
     Route::post('/post/dislike', [LikeController::class, 'downvotePost'])->name('post.dislike');
 
     // User
+    Route::get('/profile', [UserController::class, 'showProfile']);
+    Route::get('/user/{id}', [UserController::class, 'showUserInfo']);
+
     Route::post('/user/save', [UserController::class, 'saveUpdatedUser']);
     
+    Route::post('/user/{id}/follow', [FriendController::class, 'followUser']);
+    Route::post('/user/{id}/unfollow', [FriendController::class, 'unfollowUser']);
+
     // Comment
     Route::post('/comment/save', [CommentController::class, 'saveNewComment']);
     Route::get('/comment/delete/{id}', [CommentController::class, 'deleteComment']);

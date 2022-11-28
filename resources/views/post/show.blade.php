@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" id="header-txt">
-            View story
+            View post
         </h2>
     </x-slot>
 
@@ -105,11 +105,6 @@
                                 @else
                                     @if(Auth::check() && Auth::user()->isAdmin())
                                         <a href='javascript:void(0)' class="cursor-pointer deleteBtn" id="{{ $post->id }}">Delete</a>
-                                    @endif
-                                    @if(Auth::check() && Auth::user()->isAdmin() == false && Auth::id() != $post->user_id)
-                                        <a href="javascript:void(0)" id="reportBtn" class="ml-4">
-                                            Report
-                                        </a>
                                     @endif
                                 @endif
                             </div>
@@ -298,21 +293,6 @@
                         }else{
                             btn.setAttribute('fill', 'none');
                         }
-                    }
-                });
-            });
-
-            $('.reportBtn').on('click', function(){
-                $.ajax({
-                    method: "POST",
-                    url: '{{ route("post.report") }}',
-                    data: { id: this.id }
-                })
-                .done(function(response){
-                    response = response.replaceAll("\"", "");
-                    if(response){
-                        $('#errorMssgText').text(response);
-                        $('#errorMssg').show();
                     }
                 });
             });
