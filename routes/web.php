@@ -31,7 +31,7 @@ Route::get('/home', [HomeController::class, 'showHome'])->name('home');
 
 // Post
 Route::get('/post/show/{id}', [PostController::class, 'showPost']);
-
+Route::get('/user/{id}', [UserController::class, 'showUserInfo']);
 
 Route::middleware(['auth'])->group(function () {
     // Post
@@ -50,7 +50,6 @@ Route::middleware(['auth'])->group(function () {
 
     // User
     Route::get('/profile', [UserController::class, 'showProfile']);
-    Route::get('/user/{id}', [UserController::class, 'showUserInfo']);
 
     Route::post('/user/save', [UserController::class, 'saveUpdatedUser']);
     

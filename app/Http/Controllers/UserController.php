@@ -23,10 +23,14 @@ class UserController extends Controller
     public function showUserInfo(Request $request){
         $user = User::find($request->id);
         $posts = Post::where('user_id', $user->id)->get();
+        $following_friends = Friend::where('user_id', $user->id)->get();
+        $followers_friends = Friend::where("friend_id", $user->id)->get();
 
         return view("user.show", [
             "user" => $user,
             "posts" => $posts,
+            "count_following" => count($following_friends),
+            "count_followers" => count($followers_friends)
         ]);
     }
 

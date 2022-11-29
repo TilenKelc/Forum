@@ -12,7 +12,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                @if(in_array($user->id, Auth::user()->getAllFriendsID()))
+                @if(Auth::check() && in_array($user->id, Auth::user()->getAllFriendsID()))
                     <form method="POST" action='{{ url("/user/$user->id/unfollow") }}'>
                 @else
                     <form method="POST" action='{{ url("/user/$user->id/follow") }}'>
@@ -31,25 +31,27 @@
                         <div class="text-center">
                             <div class="inline-block mr-5">
                                 <x-label for="username" :value="__('Followers')"/>
-                                <p class="block mt-1 w-full">10</p>
+                                <p class="block mt-1 w-full">{{ $count_followers }}</p>
                             </div>
                             <div class="inline-block ml-5">
                                 <x-label for="username" :value="__('Following')"/>
-                                <p class="block mt-1 w-full">12</p>
+                                <p class="block mt-1 w-full">{{ $count_following }}</p>
                             </div>
                         </div>
                     
-                        <div class="mt-5 text-center">
-                            @if(in_array($user->id, Auth::user()->getAllFriendsID()))
-                                <x-button>
-                                    Stop following
-                                </x-button>
-                            @else
-                                <x-button>
-                                    Start following
-                                </x-button>
-                            @endif
-                        </div>
+                        @if(Auth::check() && Auth::id() != $user->id)
+                            <div class="mt-5 text-center">
+                                @if(in_array($user->id, Auth::user()->getAllFriendsID()))
+                                    <x-button>
+                                        Stop following
+                                    </x-button>
+                                @else
+                                    <x-button>
+                                        Start following
+                                    </x-button>
+                                @endif
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
