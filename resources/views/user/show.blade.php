@@ -13,9 +13,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                 @if(Auth::check() && in_array($user->id, Auth::user()->getAllFriendsID()))
-                    <form method="POST" action='{{ url("/user/$user->id/unfollow") }}'>
+                    <form method="POST" action='{{ url("/user/$user->id/unfollow") }}' class="profile-form">
                 @else
-                    <form method="POST" action='{{ url("/user/$user->id/follow") }}'>
+                    <form method="POST" action='{{ url("/user/$user->id/follow") }}' class="profile-form">
                 @endif
                         @csrf
 
@@ -41,15 +41,27 @@
                     
                         @if(Auth::check() && Auth::id() != $user->id)
                             <div class="mt-5 text-center">
-                                @if(in_array($user->id, Auth::user()->getAllFriendsID()))
-                                    <x-button>
-                                        Stop following
-                                    </x-button>
+                                @if(Auth::user()->isBlocked())
+                                    @if(in_array($user->id, Auth::user()->getAllFriendsID()))
+                                        <x-button class="show-error-mssg">
+                                            Stop following
+                                        </x-button>
+                                    @else
+                                        <x-button class="show-error-mssg">
+                                            Start following
+                                        </x-button>
+                                    @endif
                                 @else
-                                    <x-button>
-                                        Start following
-                                    </x-button>
-                                @endif
+                                    @if(in_array($user->id, Auth::user()->getAllFriendsID()))
+                                        <x-button>
+                                            Stop following
+                                        </x-button>
+                                    @else
+                                        <x-button>
+                                            Start following
+                                        </x-button>
+                                    @endif
+                                @endif  
                             </div>
                         @endif
                     </form>
@@ -123,6 +135,11 @@
                                 @if(Auth::check() && Auth::user()->isAdmin())
                                     <a href='javascript:void(0)' class="cursor-pointer deleteBtn" id="{{ $post->id }}">Delete</a>
                                 @endif
+                                @if(Auth::check() && Auth::user()->isAdmin() == false && Auth::id() != $post->user_id)
+                                    <a href="javascript:void(0)" class="reportBtn ml-4 cursor-pointer" id="{{ $post->id }}">
+                                        Report
+                                    </a>
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -140,4 +157,101 @@
             </div>
         </div>
     @endif
+    @if(Auth::check() && Auth::user()->isBlocked())
+        <script>
+            $('.profile-form').submit(false);
+        </script>
+    @endif
+    <script>
+        $(document).ready(() => {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.show-error-mssg').on('click', function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'This action is not allowed, as your account is blocked!',
+                });
+            });
+
+            $('.upvote').on('click', function(){
+                let btn = this;
+                $.ajax({
+                    method: "POST",
+                    url: '{{ route("post.like") }}',
+                    data: { id: this.id, like: 1}
+                })
+                .done(function(response){
+                    if(response){
+                        btn.parentElement.childNodes[3].innerText = response;
+                        let downBtn = btn.parentElement.childNodes[5];
+                        
+                        if(btn.getAttribute('fill') == 'none'){
+                            if(downBtn.getAttribute('fill') != 'none'){
+                                downBtn.setAttribute('fill', 'none');
+                            }
+                            btn.setAttribute('fill', 'grey');
+                        }else{
+                            btn.setAttribute('fill', 'none');
+                        }
+                    }
+                });
+            });
+
+            $('.reportBtn').on('click', function(){
+                Swal.fire({
+                    title: 'Are you sure, you want to report this post?',
+                    text: "Reported post will be review by admins",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, report it!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: "POST",
+                            url: '{{ route("post.report") }}',
+                            data: { id: this.id }
+                        })
+                        .done(function(response){
+                            response = response.replaceAll("\"", "");
+                            if(response){
+                                $('#errorMssgText').text(response);
+                                $('#errorMssg').show();
+                            }
+                        });
+                    }
+                })
+            });
+
+            $('.downvote').on('click', function(){
+                let btn = this;
+                $.ajax({
+                    method: "POST",
+                    url: '{{ route("post.dislike") }}',
+                    data: { id: this.id, like: 0}
+                })
+                .done(function(response){
+                    if(response){
+                        btn.parentElement.childNodes[3].innerText = response;
+                        let upBtn = btn.parentElement.childNodes[1];
+                        
+                        if(btn.getAttribute('fill') == 'none'){
+                            if(upBtn.getAttribute('fill') != 'none'){
+                                upBtn.setAttribute('fill', 'none');
+                            }
+                            btn.setAttribute('fill', 'grey');
+                        }else{
+                            btn.setAttribute('fill', 'none');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </x-app-layout>

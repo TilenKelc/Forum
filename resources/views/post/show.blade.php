@@ -106,6 +106,11 @@
                                     @if(Auth::check() && Auth::user()->isAdmin())
                                         <a href='javascript:void(0)' class="cursor-pointer deleteBtn" id="{{ $post->id }}">Delete</a>
                                     @endif
+                                    @if(Auth::check() && Auth::user()->isAdmin() == false && Auth::id() != $post->user_id)
+                                        <a href="javascript:void(0)" class="reportBtn ml-4 cursor-pointer" id="{{ $post->id }}">
+                                            Report
+                                        </a>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -314,6 +319,21 @@
                         window.location = base_link + link;
                     }
                 })
+            });
+
+            $('.reportBtn').on('click', function(){
+                $.ajax({
+                    method: "POST",
+                    url: '{{ route("post.report") }}',
+                    data: { id: this.id }
+                })
+                .done(function(response){
+                    response = response.replaceAll("\"", "");
+                    if(response){
+                        $('#errorMssgText').text(response);
+                        $('#errorMssg').show();
+                    }
+                });
             });
 
             $('.redirectBtn').on('click', function(){

@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/post/save/{id}', [PostController::class, 'saveUpdatedPost']);
     //Route::get('/post/{id}', [PostController::class, 'showPost']);
     Route::get('/post/delete/{id}', [PostController::class, 'deletePost']);
+    Route::post('/post/report', [PostController::class, 'reportPost'])->name('post.report');
 
     // Post likes
     Route::post('/post/like', [LikeController::class, 'upvotePost'])->name('post.like');
