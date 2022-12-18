@@ -52,6 +52,13 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isModerator(){
+        if($this->privileges == 'moderator'){
+            return true;
+        }
+        return false;
+    }
+
     public function isBlocked(){
         if($this->deleted){
             return true;

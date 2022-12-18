@@ -25,13 +25,15 @@
                             View your posts
                         </x-nav-link>
 
-                        @if(Auth::user()->isAdmin())
+                        @if(Auth::user()->isModerator() || Auth::user()->isAdmin())
                             <x-nav-link :href="url('/admin/post/all')" :active="request()->routeIs('admin.post')">
                                 Posts panel
                             </x-nav-link>
-                            <x-nav-link :href="url('/admin/user/all')" :active="request()->routeIs('admin.user')">
-                                Users panel
-                            </x-nav-link>
+                            @if(Auth::user()->isAdmin())
+                                <x-nav-link :href="url('/admin/user/all')" :active="request()->routeIs('admin.user')">
+                                    Users panel
+                                </x-nav-link>
+                            @endif
                         @endif
                     @endif
                 </div>

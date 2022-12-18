@@ -62,10 +62,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/comment/delete/{id}', [CommentController::class, 'deleteComment']);
 });
 
-Route::middleware(['auth', 'admin'])->group(function (){
+Route::middleware(['auth', 'moderator'])->group(function (){
     Route::get('/admin/post/{type}', [PostController::class, 'showPosts'])->name('admin.post');
     Route::get('/admin/post', [PostController::class, 'fetchPosts'])->name('post.fetch');
+});
 
+Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('/admin/user/{type}', [UserController::class, 'showUsers'])->name('admin.user');
     Route::get('/admin/user', [UserController::class, 'fetchUsers'])->name('user.fetch');
 
