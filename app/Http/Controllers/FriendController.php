@@ -32,5 +32,35 @@ class FriendController extends Controller
         
         session(['successMssg' => "You stoped following $user->username"]);
         return back();
-    }    
+    }
+    
+    /* ---------------------- Api ------------------------- */
+
+    public function followUserApi(Request $request){
+        $request->validate([
+            'id' => ['required'],
+        ]);
+
+        $user = User::find($request->id);
+        $friend = new Friend();
+        $friend->friend_id = $request->id;
+        $friend->user_id = $request->user()->id;
+        $friend->save();
+
+        return response()->json([
+            "status" => 200
+        ]);
+    }
+
+    public function unfollowUserApi(Request $request){
+        $request->validate([
+            'id' => ['required'],
+        ]);
+
+        $user = User::find($request->id);
+        $friend = Friend::where('user_id', $request->user()->id)->where('friend_id', $request->id)->first();
+        $friend->delete();
+        
+        return response()->json(["status" => 200]);
+    }   
 }

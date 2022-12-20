@@ -115,4 +115,79 @@ class UserController extends Controller
 
         return back();
     }
+
+    /** --------------------------- Api ------------------ */
+
+    public function registerApi(Request $request){
+        $request->validate([
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'status' => 200,
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    }
+
+    public function loginApi(Request $request){
+        if(!Auth::attempt($request->only('email', 'password'))){
+            return response()->json([
+                'message' => 'Invalid login details'
+            ], 401);
+        }
+
+        $user = User::where('email', $request['email'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    }
+
+    public function getProfileApi(Request $request){
+        return response()->json([
+            'status' => 200, 
+            'data' => $request->user()
+        ]);        
+    }
+
+    public function getUserInfoApi(Request $request){
+        $user = User::find($request->id);
+        return response()->json(["status" => 200, "data" => $user]);
+    }
+
+    public function saveUpdatedUserApi(Request $request){
+        $user = $request->user();
+
+        if($request->password != null || $request->password_confirmation != null){
+            $request->validate([
+                'password' => ['required', Rules\Password::defaults()],
+            ]);
+
+            $user->password = Hash::make($request->password);
+        }
+        
+        if($request->username != Auth::user()->username){
+            $request->validate([
+                'username' => ['required', 'string', 'max:255', 'unique:users'],
+            ]);
+            $user->username = $request->username;
+        }
+        $user->save();
+
+        return response()->json(['status' => 200]);
+    }
 }
