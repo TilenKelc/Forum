@@ -1,0 +1,1603 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Forum Api Documentation",
+        "description": "Forum api documentation with L5 Swagger OpenApi",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/comment/save": {
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Save comment",
+                "description": "Save new comment",
+                "operationId": "b8f0d72f0ef89b35070e4093d34cec6b",
+                "requestBody": {
+                    "description": "Pass comment parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "New comment"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "num",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/comment/delete": {
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Delete comment",
+                "description": "Delete comment by comment id",
+                "operationId": "3e924175658d72155f1317c8a7877927",
+                "requestBody": {
+                    "description": "Pass comment parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/follow": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Follow user",
+                "description": "Start following user by given user id",
+                "operationId": "f950944e1a658ec0a8cc9f70b2ab5566",
+                "requestBody": {
+                    "description": "Pass follow parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/unfollow": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Unfollow user",
+                "description": "Stop following user by given user id",
+                "operationId": "65a662163e2048ccfaeb8fe9bcb919ed",
+                "requestBody": {
+                    "description": "Pass unfollow parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/upvote": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Upvote post",
+                "description": "Upvote post by given post id",
+                "operationId": "7716fcd43e737ff31e34d4028c50e924",
+                "requestBody": {
+                    "description": "Pass upvote parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "like"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    },
+                                    "like": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "num",
+                                            "example": "4"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/downvote": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Downvote post",
+                "description": "Downvote post by given post id",
+                "operationId": "2010f4ff73aba5b99b21b1a5ae3fcbb6",
+                "requestBody": {
+                    "description": "Pass downvote parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "like"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "1"
+                                    },
+                                    "like": {
+                                        "type": "num",
+                                        "format": "num",
+                                        "example": "0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "num",
+                                            "example": "4"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "All Posts",
+                "description": "Get all posts",
+                "operationId": "a47cb053c38864ef6243a8c0575fcf82",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "default": "Testna objava"
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                                            },
+                                            "user_id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "deleted": {
+                                                "type": "boolean",
+                                                "default": "0"
+                                            },
+                                            "deleted_at": {
+                                                "type": "string",
+                                                "default": null
+                                            },
+                                            "reported": {
+                                                "type": "boolean",
+                                                "default": "0"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/1": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get Post",
+                "description": "Get posts by id",
+                "operationId": "0b9c8e0630f58c595d41d26c27db6f01",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "num",
+                                            "default": "1"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "default": "Testna objava"
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                                        },
+                                        "user_id": {
+                                            "type": "num",
+                                            "default": "1"
+                                        },
+                                        "deleted": {
+                                            "type": "boolean",
+                                            "default": "0"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "default": null
+                                        },
+                                        "reported": {
+                                            "type": "boolean",
+                                            "default": "0"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "default": "2022-11-28T19:17:57.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "default": "2022-11-28T19:17:57.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/save": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Save post",
+                "description": "Save new post",
+                "operationId": "4093f71599c00839c49bf7b671a67795",
+                "requestBody": {
+                    "description": "Pass post parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Swagger post"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "num",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/update": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Update post",
+                "description": "Update post by given post id",
+                "operationId": "3069bd42b531afea93ebf3bbd1436d16",
+                "requestBody": {
+                    "description": "Pass post parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "title",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "string",
+                                        "example": "7"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Swagger update post"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/delete": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Delete post",
+                "description": "Delete post by given post id",
+                "operationId": "5e9ed4f07d33ae2c00dc4a5ae4163139",
+                "requestBody": {
+                    "description": "Pass post parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "string",
+                                        "example": "7"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/report": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Report post",
+                "description": "Report post by given post id",
+                "operationId": "4c29b34553a4369e222533f8bcbd38b0",
+                "requestBody": {
+                    "description": "Pass post parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "num",
+                                        "format": "string",
+                                        "example": "7"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "num",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/post/user/1": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "User Posts",
+                "description": "Get all user posts by post id",
+                "operationId": "ac3673391ee01ffbcc711a3223b1fd37",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "default": "Testna objava"
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                                            },
+                                            "user_id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "deleted": {
+                                                "type": "boolean",
+                                                "default": "0"
+                                            },
+                                            "deleted_at": {
+                                                "type": "string",
+                                                "default": null
+                                            },
+                                            "reported": {
+                                                "type": "boolean",
+                                                "default": "0"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/comments/1": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Post comments",
+                "description": "Get all post comments by post id",
+                "operationId": "f4f3782ab471ddd3c123348a53606a92",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "user_id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "post_id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "default": "Moja prva objava"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post/votes/1": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Post votes",
+                "description": "Get all post votes by post id",
+                "operationId": "37646b5cbf4b06ccc5a8b2af452c5b14",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "like": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "user_id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "post_id": {
+                                                "type": "num",
+                                                "default": "1"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "default": "2022-11-28T19:17:57.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Sign up",
+                "description": "Register new user",
+                "operationId": "23ab9041da80baa02a91a3d2697333a1",
+                "requestBody": {
+                    "description": "Pass user parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "newUsername"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "newUser1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "2|Z9A4JDgbpwoMqBUIR4cYMbaiKfmxMNbiCLrTowZN"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Sign in",
+                "description": "Login by email and password",
+                "operationId": "7de40d017815ac61f8fd4388afda3e63",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "newUser1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "2|Z9A4JDgbpwoMqBUIR4cYMbaiKfmxMNbiCLrTowZN"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid login details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user profile",
+                "description": "Get current user profile",
+                "operationId": "31c48444b1e7141b80a71f2a27b00dfc",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "num",
+                                            "default": "6"
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "default": "newUsername"
+                                        },
+                                        "privileges": {
+                                            "type": "string",
+                                            "default": "user"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "default": "newUser1@gmail.com"
+                                        },
+                                        "deleted": {
+                                            "type": "num",
+                                            "default": "0"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "default": null
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "default": "2022-11-28T19:17:57.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "default": "2022-11-28T19:17:57.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/1": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User info",
+                "description": "Get user info from user id",
+                "operationId": "c3991abe22913ef7ddc1da68dec692f8",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "num",
+                                            "default": "1"
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "default": "mts"
+                                        },
+                                        "privileges": {
+                                            "type": "string",
+                                            "default": "user"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "default": "user@gmail.com"
+                                        },
+                                        "deleted": {
+                                            "type": "num",
+                                            "default": "0"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "default": null
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "default": "2022-11-28T19:17:57.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "default": "2022-11-28T19:17:57.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/save": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user",
+                "description": "Save updated user info",
+                "operationId": "fc50187faf4b34070fe65f0c655d1ead",
+                "requestBody": {
+                    "description": "Pass user parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "newUsername"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Missing parameters response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Error explanation"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "401": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Unauthenticated."
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
