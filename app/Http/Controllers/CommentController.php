@@ -30,35 +30,4 @@ class CommentController extends Controller
         
         return back();
     }
-
-    /* ------------------- Api ------------------ */
-
-    public function saveCommentApi(Request $request){
-        $request->validate([
-            'id' => ['required'],
-            'content' => ['required', 'max:255'],
-        ]);
-
-        $comment = new Comment();
-        $comment->user_id = 1;
-        $comment->post_id = $request->id;
-        $comment->content = $request->content;
-        $comment->save();
-
-        return response()->json([
-            "status" => 200, 
-            "id" => $comment->id
-        ]);
-    }
-
-    public function deleteCommentApi(Request $request){
-        $request->validate([
-            'id' => ['required'],
-        ]);
-
-        $comment = Comment::find($request->id);
-        $comment->delete();
-
-        return response()->json(["status" => 200]);
-    }
 }

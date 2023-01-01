@@ -3,12 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\FriendController;
-
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,88 +22,88 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Post
     // save new post 
     // body info (title, content)
-    Route::post('/post/save', [PostController::class, 'savePostApi']);
+    Route::post('/post/save', [ApiController::class, 'savePostApi']);
 
     // update post 
     // body info (id, title, content)
-    Route::post('/post/update', [PostController::class, 'updatePostApi']);
+    Route::post('/post/update', [ApiController::class, 'updatePostApi']);
 
     // delete post 
     // body info (id)
-    Route::post('/post/delete', [PostController::class, 'deletePostApi']);
+    Route::post('/post/delete', [ApiController::class, 'deletePostApi']);
 
     // report post 
     // body info (id)
-    Route::post('/post/report', [PostController::class, 'reportPostApi']);
+    Route::post('/post/report', [ApiController::class, 'reportPostApi']);
 
 
     // Comment
     // save new comment
     // body info (id - post, content)
-    Route::post('/comment/save', [CommentController::class, 'saveCommentApi']);
+    Route::post('/comment/save', [ApiController::class, 'saveCommentApi']);
 
     // delete comment
     // body info (id - comment)
-    Route::post('/comment/delete', [CommentController::class, 'deleteCommentApi']);
+    Route::post('/comment/delete', [ApiController::class, 'deleteCommentApi']);
 
 
     // Follow
     // body info (id - user)
-    Route::post('/follow', [FriendController::class, 'followUserApi']);
+    Route::post('/follow', [ApiController::class, 'followUserApi']);
 
     // body info (id - user)
-    Route::post('/unfollow', [FriendController::class, 'unfollowUserApi']);
+    Route::post('/unfollow', [ApiController::class, 'unfollowUserApi']);
 
 
     // Votes
     // upvote post
     // body info (id - post, like (boolean))
-    Route::post('/post/upvote', [LikeController::class, 'upvotePostApi']);
+    Route::post('/post/upvote', [ApiController::class, 'upvotePostApi']);
 
     // downvote post
     // body info (id - post)
-    Route::post('/post/downvote', [LikeController::class, 'downvotePostApi']);
+    Route::post('/post/downvote', [ApiController::class, 'downvotePostApi']);
 
     
     // User
      // get user profile
-    Route::get('/profile', [UserController::class, 'getProfileApi']);
+    Route::get('/profile', [ApiController::class, 'getProfileApi']);
 
     // get user profile
     // body (username, password)
-    Route::post('/user/save', [UserController::class, 'saveUpdatedUserApi']);
+    Route::post('/user/save', [ApiController::class, 'saveUpdatedUserApi']);
 });
 
 // header-info (Accept: application/json, Content-Type: application/json)
 
 // Login
 // body info (email, pass)
-Route::post('/login', [UserController::class, 'loginApi']);
+Route::post('/login', [ApiController::class, 'loginApi']);
 
 // Register
 // body info (username, email, pass)
-Route::post('/register', [UserController::class, 'registerApi']);
+Route::post('/register', [ApiController::class, 'registerApi']);
 
 
 // Post
 // all posts
-Route::get('/posts', [PostController::class, 'getAllPostsApi']);
+Route::get('/posts', [ApiController::class, 'getAllPostsApi']);
 
 // single post by id (ex: /post/1)
-Route::get('/post/{id}', [PostController::class, 'getPostApi']);
+Route::get('/post/{id}', [ApiController::class, 'getPostApi']);
 
 // user posts 
 // body info (id - user)
-Route::get('/post/user/{id}', [PostController::class, 'getUserPostsApi']);
+Route::get('/post/user/{id}', [ApiController::class, 'getUserPostsApi']);
 
 // get all post comments
 // body info (id - post)
-Route::get('/post/comments/{id}', [PostController::class, 'getAllPostCommentsApi']);
+Route::get('/post/comments/{id}', [ApiController::class, 'getAllPostCommentsApi']);
 
 // get all post votes
 // body info (id - post)
-Route::get('/post/votes/{id}', [PostController::class, 'getAllPostVotesApi']);
+Route::get('/post/votes/{id}', [ApiController::class, 'getAllPostVotesApi']);
 
 // User
  // get user info
- Route::get('/user/{id}', [UserController::class, 'getUserInfoApi']);
+ Route::get('/user/{id}', [ApiController::class, 'getUserInfoApi']);
