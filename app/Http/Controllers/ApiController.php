@@ -862,7 +862,7 @@ class ApiController extends Controller
     }
 
     /**
-     * @OA\GET(
+     * @OA\POST(
      * path="/login",
      * summary="Sign in",
      * description="Login by email and password",
@@ -931,9 +931,9 @@ class ApiController extends Controller
  *        @OA\Property(property="created_at", type="string", default="2022-11-28T19:17:57.000000Z"),     
  *        @OA\Property(property="updated_at", type="string", default="2022-11-28T19:17:57.000000Z"),     
 
- *        )
      *     )
      * ),
+     * 
      * @OA\Response(
      *    response=401,
      *    description="Unauthorized",
@@ -941,7 +941,7 @@ class ApiController extends Controller
      *       @OA\Property(property="message", type="string", example="Unauthenticated.")
      *     )
      * ),
-     * ),
+     * 
      * security={{"sanctum": {}}},
      * )
     */
@@ -1013,7 +1013,17 @@ class ApiController extends Controller
     *        @OA\Property(property="errors", type="object", 
     *)
      *  )
-     * ))
+     * ),
+     * * @OA\Response(
+     *    response=401,
+     *    description="Unauthorized",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Unauthenticated.")
+     *     )
+     * ),
+     * 
+     * security={{"sanctum": {}}},
+     * )
      */
 
     public function saveUpdatedUserApi(Request $request){

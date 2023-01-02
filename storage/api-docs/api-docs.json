@@ -1315,13 +1315,13 @@
             }
         },
         "/login": {
-            "get": {
+            "post": {
                 "tags": [
                     "Authentication"
                 ],
                 "summary": "Sign in",
                 "description": "Login by email and password",
-                "operationId": "7de40d017815ac61f8fd4388afda3e63",
+                "operationId": "24d5659546ec03465c8654d6e9f62bd7",
                 "requestBody": {
                     "description": "Pass user credentials",
                     "required": true,
@@ -1437,8 +1437,29 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/user/1": {
@@ -1567,30 +1588,33 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
     },
     "components": {
-        "responses": {
-            "401": {
-                "description": "Unauthorized",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "example": "Unauthenticated."
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "securitySchemes": {
             "sanctum": {
                 "type": "apiKey",
