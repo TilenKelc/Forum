@@ -23,6 +23,10 @@ return new class extends Migration
             $table->boolean('reported')->default(false);
             $table->timestamps();
         });
+
+        Schema::table('posts', function($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
