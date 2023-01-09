@@ -1,8 +1,7 @@
 # BlogIt
 
 ## Avtorja
-Tilen Kelc
-Domen Košir
+Tilen Kelc, Domen Košir
 
 ## O BlogIt-IS
 [BlogIt](https://tilenkelc.eu/Forum) je novo spletno omrežje, katero omogoča prijavo in registracijo uporabnikov. Stran omogoča tudi prikaz vseh objav, komentarjev in všečkov neprijavljenim uporabnikom, vendar pa le teh ne morejo spreminjati. Ko se uporabnik prijavi, dobi dostop do dodajanja in urejanja objav, prav tako jih lahko komentira in všečka. Če so mu objave določene osebe všeč, pa lahko tudi tej osebi začne slediti. Vsak uporabnik ima pregled nad vsemi svojimi objavami.
