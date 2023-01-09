@@ -16,15 +16,12 @@ Administrator lahko uporabnika tudi blokira, nakar se mu onemogoči vse funkcije
 * Poganjanje projekta: `php artisan serve`
 
 ![Landing Page](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_102537.png)
-](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_102537.png)
-![Landing Page](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_102537.png)
-![Landing Page](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_102537.png)
-![Landing Page](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_102537.png)
-
+![Add post](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_102854.png)
+![Admin page](https://github.com/TilenKelc/Forum/blob/main/images/image.png)
 
 ## Podatkovna baza
 Podatkovna baza je zgrajena iz 6 tabel. 
-![Database Scheme]()
+![Database Scheme](https://github.com/TilenKelc/Forum/blob/main/images/pb.jpg)
 
 ### Avtentikacija in avtorizacija
 Laravel že privzeto uporablja avtentikator. Za avtentikacijo API-ja, pa smo uporabili Sanctum.
@@ -32,3 +29,6 @@ Laravel že privzeto uporablja avtentikator. Za avtentikacijo API-ja, pa smo upo
 
 ## REST API
 API je dokumentiran [tukaj](https://tilenkelc.eu/Forum/api/documentation). Omogoča izvajanje vseh funkcionalnosti, katere ima uporabnik.
+
+## Mobilni odjemalec
+![mobile](https://github.com/TilenKelc/Forum/blob/main/images/Screenshot_2023-01-09_113025.png)
